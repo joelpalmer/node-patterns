@@ -53,18 +53,24 @@ function spiderlinks(currentUrl, body, nesting, callback) {
     return process.nextTick(callback);
   }
   const links = utilities.getPageLinks(currentUrl, body);
-  function iterate(index) {
-    if (index === links.length) {
-      return callback();
-    }
-    spider(links[index], nesting - 1, err => {
-      if (err) {
-        return callback(err);
-      }
-      iterate(index + 1);
-    });
+  if (links.length === 0) {
+      return process.nextTick(callback);
   }
-  iterate(0);
+  let completed = 0;
+  let hasErrors = false;
+
+  function done(err) {
+      if(err) {
+          hasErrors = true;
+          return callback(err);
+      }
+      if (++completed === links.length && !hasErrors) {
+          return callback();
+      }
+  }
+  links.forEach(link => {
+      spider(link, nesting -1, done);
+  });
 }
 
 spider(process.argv[2], 3, err => {
