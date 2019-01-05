@@ -4,7 +4,12 @@ const mkdirp = require("mkdirp");
 const path = require("path");
 const utilities = require("./utilities");
 
+const spidering = new Map();
 function spider(url, nesting, callback) {
+  if (spidering.has(url)) {
+    return process.nextTick(callback);
+  }
+  spidering.set(url, true);
   const filename = utilities.urlToFilename(url);
   fs.readFile(filename, "utf8", (err, body) => {
     if (err) {
@@ -54,22 +59,22 @@ function spiderlinks(currentUrl, body, nesting, callback) {
   }
   const links = utilities.getPageLinks(currentUrl, body);
   if (links.length === 0) {
-      return process.nextTick(callback);
+    return process.nextTick(callback);
   }
   let completed = 0;
   let hasErrors = false;
 
   function done(err) {
-      if(err) {
-          hasErrors = true;
-          return callback(err);
-      }
-      if (++completed === links.length && !hasErrors) {
-          return callback();
-      }
+    if (err) {
+      hasErrors = true;
+      return callback(err);
+    }
+    if (++completed === links.length && !hasErrors) {
+      return callback();
+    }
   }
   links.forEach(link => {
-      spider(link, nesting -1, done);
+    spider(link, nesting - 1, done);
   });
 }
 
