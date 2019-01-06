@@ -3,6 +3,8 @@ const fs = require("fs");
 const mkdirp = require("mkdirp");
 const path = require("path");
 const utilities = require("./utilities");
+const TaskQueue = require('./taskQueue');
+const downloadQueue = new TaskQueue(2);
 
 const spidering = new Map();
 function spider(url, nesting, callback) {
