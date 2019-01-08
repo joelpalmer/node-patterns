@@ -3,7 +3,7 @@ const fs = require("fs");
 const mkdirp = require("mkdirp");
 const path = require("path");
 const utilities = require("./utilities");
-const TaskQueue = require('./taskQueue');
+const TaskQueue = require("./taskQueue");
 const downloadQueue = new TaskQueue(2);
 
 const spidering = new Map();
@@ -66,17 +66,19 @@ function spiderlinks(currentUrl, body, nesting, callback) {
   let completed = 0;
   let hasErrors = false;
 
-  function done(err) {
-    if (err) {
-      hasErrors = true;
-      return callback(err);
-    }
-    if (++completed === links.length && !hasErrors) {
-      return callback();
-    }
-  }
   links.forEach(link => {
-    spider(link, nesting - 1, done);
+    downloadQueue.pushTask(done => {
+      spider(link, nesting - 1, err => {
+        if (err) {
+          hasErrors = true;
+          return callback(err);
+        }
+        if (++completed === links.length && !hasErrors) {
+          callback();
+        }
+        done();
+      });
+    });
   });
 }
 

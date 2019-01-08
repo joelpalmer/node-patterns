@@ -1,4 +1,4 @@
-class TaskQueue {
+ module.exports = class TaskQueue {
     /**
      * 
      * @param {Number} concurrency 
