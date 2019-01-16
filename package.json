@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.6.1",
+    "chance": "^1.0.18",
     "cheerio": "^1.0.0-rc.2",
     "mkdirp": "^0.5.1",
     "request": "^2.88.0",
