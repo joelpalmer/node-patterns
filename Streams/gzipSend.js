@@ -4,6 +4,7 @@ const http = require("http");
 const path = require("path");
 const file = process.argv[2];
 const server = process.argv[3];
+const crypto = require('crypto');
 
 const options = {
   hostName: server,
@@ -23,6 +24,7 @@ const req = http.request(options, res => {
 
 fs.createReadStream(file)
   .pipe(zlib.createGzip())
+  .pipe(crypto.createCipher('aes-192-gcm', 'a_shared_secret'))
   .pipe(req)
   .on("finish", () => {
     console.log("File sent");
