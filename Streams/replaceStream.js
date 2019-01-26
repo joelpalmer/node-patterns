@@ -19,6 +19,7 @@ class ReplaceStream extends stream.Transform {
         pieces[pieces.length -1] = lastPiece.slice(0, -tailPieceLen);
 
         this.push(pieces.join(this.replaceString));
+        callback();
     }
 
     _flush(callback) {
