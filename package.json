@@ -16,11 +16,13 @@
     "duplexer2": "^0.1.4",
     "from2": "^2.3.0",
     "from2-array": "0.0.4",
+    "fstream": "^1.0.11",
     "mkdirp": "^0.5.1",
     "multipipe": "^3.0.1",
     "request": "^2.88.0",
     "slug": "^0.9.3",
     "split": "^1.0.1",
+    "tar": "^4.4.8",
     "through2": "^3.0.0",
     "through2-parallel": "^0.1.3"
   }
