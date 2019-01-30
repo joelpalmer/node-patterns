@@ -14,3 +14,4 @@ fs.createReadStream(process.argv[2])
     }))
     .pipe(fs.createWriteStream('results.txt'))
     .on('finish', () => console.log('all urls were checked'));
+    // if we needed to maintain order we can use through2-parallel
