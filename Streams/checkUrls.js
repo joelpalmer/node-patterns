@@ -1,11 +1,11 @@
 const fs = require('fs');
 const split = require('split');
 const request = require('request');
-const ParallelStream = require('./parallelStream');
+const LimitedParallelStream = require('./limitedParallelStream');
 
 fs.createReadStream(process.argv[2])
     .pipe(split())
-    .pipe(new ParallelStream((url, enc, push, done) => {
+    .pipe(new LimitedParallelStream(2,(url, enc, push, done) => {
         if (!url) return done();
         request.head(url, (err, response) => {
             push(url + ' is ' + (err ? 'down' : 'up') + '\n');
