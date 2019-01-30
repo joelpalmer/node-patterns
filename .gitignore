@@ -3,3 +3,5 @@ test.js
 *.gz
 *.gz.enc
 urlList.txt
+*.md5
+*.sha1
