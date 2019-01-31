@@ -10,7 +10,7 @@ function demultiplexChannel(source, destinations) {
 			let chunk;
 			if (currentChannel === null) {
 				chunk = source.read(1);
-				currentChannel = chunk && chunk.read.readUInt8(0);
+				currentChannel = chunk && chunk.readUInt8(0);
 			}
 
 			if (currentLength === null) {
