@@ -23,3 +23,12 @@ function multiplexChannels(sources, destination) {
 			});
 	}
 }
+
+const socket = net.connect(3000, () => {
+    const child = child_process.fork(
+        process.argv[2],
+        process.argv.slice(3),
+        {silent: true}
+    );
+    multiplexChannels([child.stdout, child.stderr], socket);
+})
