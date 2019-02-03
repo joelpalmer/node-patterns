@@ -11,7 +11,7 @@ module.exports = class zmqMiddlewareManager {
 	}
 
 	send(data) {
-		constmessage = {
+		const message = {
 			data
 		};
 		this.executeMiddleware(this.outboundMiddleware, message, () => {

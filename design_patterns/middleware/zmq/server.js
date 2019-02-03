@@ -5,7 +5,7 @@ const reply = zmq.socket('rep');
 reply.bind('tcp://127.0.0.1:5000');
 
 const zmqm = new zmqMiddlewareManager(reply);
-zmqm.use(jsonMiddleware());
+zmqm.use(jsonMiddleware.json());
 
 zmqm.use({
     inbound: function (message, next) {
