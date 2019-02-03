@@ -6,6 +6,7 @@ module.exports.json = () => {
         },
         outbound: function (message, next) {
             message.data = new Buffer(JSON.stringify(message.data));
+            next();
         }
     }
 };
