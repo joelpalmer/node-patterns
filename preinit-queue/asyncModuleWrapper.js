@@ -1,0 +1,1 @@
+const asyncModule = require('./asyncModule');
