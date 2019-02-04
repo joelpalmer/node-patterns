@@ -1,4 +1,4 @@
-const asyncModule = require('./asyncModule');
+const asyncModule = require('./asyncModuleWrapper');
 
 module.exports.time = (req, res) => {
     asyncModule.returnTime((err, time) => {

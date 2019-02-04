@@ -1,6 +1,6 @@
 const http = require('http');
 const routes = require('./routes');
-const asyncModule = require('./asyncModule');
+const asyncModule = require('./asyncModuleWrapper');
 
 asyncModule.initialize(() => {
     console.log('Async module initialized');
