@@ -1,5 +1,5 @@
 const http = require('http');
-const SubsetSum = require('./subsetSum');
+const SubsetSum = require('./subsetSumDefer');
 
 http.createServer((req, res) => {
     const url = require('url').parse(req.url, true);
