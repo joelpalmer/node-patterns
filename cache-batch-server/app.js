@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const totalSales = require('./totalSales');
+const totalSales = require('./totalSalesBatch');
 
 http.createServer((req, res) => {
     const query = url.parse(req.url, true).query;
@@ -10,4 +10,5 @@ http.createServer((req, res) => {
     });
 }).listen(8000, () => console.log('Started'));
 
-// 4243ms
+// 4243ms no caching or batching
+// 4048ms batching but no caching
