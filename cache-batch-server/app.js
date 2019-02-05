@@ -13,3 +13,4 @@ http.createServer((req, res) => {
 // 4243ms no caching or batching
 // 4048ms batching but no caching <= seems like this should be faster 🤔
 // 4038ms batching and caching <= not much improvement
+// we are only talking about 20 requests, greater improvements with more requests
